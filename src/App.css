@@ -28,6 +28,18 @@
   color: #61dafb;
 }
 
+.LogIn-Modal{
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  max-width:400px;
+  max-height:400px;
+}
+
+.Hidden{
+  display:none;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
