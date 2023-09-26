@@ -21,6 +21,16 @@ function useGoogleAuth() {
         .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`)
         .then((res) => {
           setProfile(res.data);
+  
+          // Send profile data to backend server
+          axios.post('http://localhost:4000/api/google-profile', res.data)
+            .then(response => {
+              console.log('Profile sent to backend:', response.data);
+            })
+            .catch(error => {
+              console.error('Error sending profile to backend:', error);
+            });
+  
         })
         .catch((err) => console.log(err));
     }
