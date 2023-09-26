@@ -10,17 +10,22 @@ function App() {
 
   return (
     <div className="container">
-      <button onClick={() => setShowProfile(!showProfile)}>
-        <img src="https://i.pinimg.com/736x/e6/3d/da/e63dda8f2d323e96490f761c461b4e23.jpg" alt="Google Icon" style={{ width: '40px', height: '40px' }} />
-      </button>
-      {showProfile && profile ? (
-        <div className="profile-section">
-          <h3>User Logged in</h3>
-          <p>Name: {profile.name}</p>
-          <p>Email: {profile.email}</p>
-          <button onClick={logOut}>Log out</button>
-        </div>
-      ) : null}
+    <button
+      className={`hamburger-button ${showProfile ? 'active' : ''}`}
+      onClick={() => setShowProfile(!showProfile)}
+    >
+      <div className="bar"></div>
+      <div className="bar"></div>
+      <div className="bar"></div>
+    </button>
+    {showProfile && profile ? (
+      <div className="profile-section">
+        <h3>User Logged in</h3>
+        <p>Name: {profile.name}</p>
+        <p>Email: {profile.email}</p>
+        <button onClick={logOut}>Log out</button>
+      </div>
+    ) : null}
       {/* Show the map section regardless of whether the user is logged in */}
       <div className="map-section">
         <Map />

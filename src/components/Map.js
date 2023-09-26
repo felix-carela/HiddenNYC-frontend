@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import ShowModal from './Modal'
 
 const MapContainer = () => {
   let API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
@@ -15,6 +17,7 @@ const MapContainer = () => {
 
   const [markers, setMarkers] = useState([]);
   const [center, setCenter] = useState(defaultCenter);
+  const [showModal, setModalVis] = useState(false)
 
   const handleMapClick = (event) => {
     const newMarker = {
@@ -25,18 +28,25 @@ const MapContainer = () => {
     setMarkers(currentMarkers => [...currentMarkers, newMarker]);
   };
 
+  const handleShowEvent = () => {
+    setModalVis(prevState => !prevState)
+  }
+
   return (
     <LoadScript googleMapsApiKey={API_KEY}>
       <GoogleMap
         mapContainerStyle={mapContainerStyles}
-        zoom={12}
+        zoom={14}
         center={center}
-        onClick={handleMapClick}
-        options={{ mapId : "af6bc521083dc9cf" }}
+        onDblClick={handleMapClick}
+        options={{ mapId : "af6bc521083dc9cf",
+                   disableDoubleClickZoom:true }}
       >
         {markers.map((marker, index) => (
-          <Marker key={index} position={marker} />
+          <Marker key={index} position={marker}
+          onClick={handleShowEvent}/>
         ))}
+      <ShowModal show={showModal}/>
       </GoogleMap>
     </LoadScript>
   );
