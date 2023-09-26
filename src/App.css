@@ -77,8 +77,8 @@
   position: relative;
   text-align: center;
   padding: 20px;
+  top: 10px; /* Add a positive top value to move it down */
 }
-
 /* Style for the hamburger button */
 .hamburger-button {
   background: none;
@@ -179,6 +179,21 @@
 }
 
 .ShowModal{
+  display: flex;
+  height: 80vh;
+  width: 25%;
+  min-width:300px;
+  min-height:500px;
+  position: relative;
+  z-index: 1;
+  background-color: white;
+  margin-left: 5%;
+  margin-top:5%;
+  border-radius: 25px;
+  box-shadow: 12px 12px 20px 1px black;
+}
+
+.EventModal{
   display: flex;
   height: 80vh;
   width: 25%;
