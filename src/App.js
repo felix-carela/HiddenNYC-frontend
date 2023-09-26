@@ -28,7 +28,7 @@ function App() {
     ) : null}
       {/* Show the map section regardless of whether the user is logged in */}
       <div className="map-section">
-        <Map />
+        <Map user={user} profile={profile}/>
       </div>
 {!profile ? (
   <div className="button-container">
