@@ -6,12 +6,15 @@ const ShowModal = ({show}) => {
     //     try()
     // }
 
+
     if(!show){
         return
     }
     return(
         <div className='ShowModal'>
-            <p>THIS WILL HAVE INFO</p>
+            <div>Event Details</div>
+            <div>User</div>
+            <div>Comment Section</div>
         </div>
     )
 }

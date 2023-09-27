@@ -15,17 +15,10 @@ function LocationDetail({ match }) {
     fetchLocationData();
   }, [match.params.id]);
 
-  const mapContainerStyles = {
-    height: "400px",
-    width: "100%"
-  };
-
   if (!location) {
     // You can display a loading indicator or error message if data is still loading or not found
     return <div>Loading...</div>;
   }
-
-  const { name, description, latitude, longitude } = location;
 
   return (
     <div>
@@ -37,7 +30,6 @@ function LocationDetail({ match }) {
           zoom={12}
           center={{ lat: latitude, lng: longitude }}
         >
-          {/* You can add markers or additional map content here if needed */}
         </GoogleMap>
       </div>
     </div>
