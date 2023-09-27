@@ -2,61 +2,82 @@ import { useNavigate, useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
 const Show = React.forwardRef((props, ref) => {
-  const { id } = useParams();
-  const people = props.people;
-  const person = people ? people.find((p) => p._id === id) : null;
+    const { id } = useParams();
+  const details = props.details;
+//   const detail = details ? details.find((p) => p._id === id) : null;
   const [editForm, setEditForm] = useState({
     name: "",
-    title: "",
-    image: ""
+    address: "",
+    image: "",
+    description: ""
   });
+
   // handleChange function for form
   const handleChange = (event) => {
-    setEditForm(prevState => ({
+    setEditForm((prevState) => ({
       ...prevState,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     }));
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.updatePeople(editForm);
+    props.updateDetails(editForm);
   };
+
   const handleDelete = () => {
-    props.deletePeople(person._id);
+    props.deleteDetail(details._id);
   };
+
   const loaded = () => {
     return (
       <>
-        <h1>{person.name}</h1>
-        <h2>{person.title}</h2>
+        <h1>{details.name}</h1>
+        <h2>{details.address}</h2>
         <img
           className="avatar-image"
-          src={person.image}
-          alt={person.name}
+          src={details.image}
+          alt={details.name}
         />
+        <h2>{details.description}</h2>
         <button id="delete" onClick={handleDelete}>
           DELETE
         </button>
       </>
     );
   };
+
   const loading = () => {
     return <h1>Loading ...</h1>;
   };
+
   useEffect(() => {
-    if(person) {
-      setEditForm(person);
+    if (details) {
+      setEditForm(details);
     }
-  }, [person]);
+  }, [details]);
+
+  // Add a condition to render null when 'show' is false
+  if (!props.show) {
+    return null;
+  }
+
   return (
-    <div className="person">
-      { person ? loaded() : loading() }
+    <div className="ShowModal" ref={ref}>
+      {details ? loaded() : loading()}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           value={editForm.name}
           name="name"
           placeholder="name"
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          value={editForm.address}
+          name="address" // Fix the 'name' attribute to 'address'
+          placeholder="address"
           onChange={handleChange}
         />
         <input
@@ -68,12 +89,12 @@ const Show = React.forwardRef((props, ref) => {
         />
         <input
           type="text"
-          value={editForm.title}
-          name="title"
-          placeholder="title"
+          value={editForm.description}
+          name="description"
+          placeholder="description"
           onChange={handleChange}
         />
-        <input type="submit" value="Update Person" />
+        <input type="submit" value="Update Event" />
       </form>
     </div>
   );
