@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+
 const EventFormModal = React.forwardRef((props, ref) => {
   const [newForm, setNewForm] = useState({
     name: '',
@@ -25,6 +26,16 @@ const EventFormModal = React.forwardRef((props, ref) => {
       image: '',
       description: '',
     });
+  };
+
+  const loaded = () => {
+    return props.details.map((detail) => (
+      <div key={detail._id} className="detail">
+        <Link to={`/details/${detail._id}`}>
+          <h1>{detail.name}</h1>
+        </Link>
+      </div>
+    ));
   };
 
   if (!props.show) {
@@ -67,5 +78,6 @@ const EventFormModal = React.forwardRef((props, ref) => {
     </div>
   );
 });
+
 
 export default EventFormModal;

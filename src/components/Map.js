@@ -65,14 +65,10 @@ const MapContainer = ({user, profile}) => {
     setCenter(newMarker);
     setMarkers(currentMarkers => [...currentMarkers, newMarker]);
     setEventModalVis(prevState => !prevState)
-
   };
-
-
   const handleShowEvent = () => {
     setModalVis(prevState => !prevState)
   }
-
   return (
     <LoadScript googleMapsApiKey={API_KEY}>
       <GoogleMap
@@ -95,9 +91,10 @@ const MapContainer = ({user, profile}) => {
         ))}
         <EventFormModal ref={eventModalRef} show={showEventModal} coordinates={center} onClose={() => setEventModalVis(false)} />
         <ShowModal ref={showModalRef} show={showModal} user={profile} onClose={() => setModalVis(false)} />
+
       </GoogleMap>
     </LoadScript>
   );
 }
-
 export default MapContainer;
+

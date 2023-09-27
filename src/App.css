@@ -70,13 +70,11 @@ body{
 .container {
   position: relative;
   text-align: center;
-
 }
 
 .gm-style{
   height:55vh;
 }
-
 /* Style for the hamburger button */
 .hamburger-button {
   background: none;
