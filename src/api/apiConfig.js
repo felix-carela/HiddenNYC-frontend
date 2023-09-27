@@ -3,7 +3,7 @@ import axios from 'axios'
 const LOCALSTORAGE_KEY = process.env.REACT_APP_LOCAL_STORAGE_KEY
 
 //make based on evironment set API url
-const API_URL = process.env.REACT_APP_ENVIORNMENT === 'development' ?  'http://localhost:4000/api/': 'http://somethingsomethingsomethingDarkSide'
+const API_URL = 'http://localhost:4000/api/'
 
 
 // Create a re-useable axios object, with our API as the baseURL

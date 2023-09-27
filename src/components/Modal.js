@@ -1,22 +1,81 @@
-import React from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
-const ShowModal = ({show}) => {
-    //will accept certain params to change the modal ie update the post, create the post, show the post
-    // const event = {
-    //     try()
-    // }
-
-
-    if(!show){
-        return
+const Show = React.forwardRef((props, ref) => {
+  const { id } = useParams();
+  const people = props.people;
+  const person = people ? people.find((p) => p._id === id) : null;
+  const [editForm, setEditForm] = useState({
+    name: "",
+    title: "",
+    image: ""
+  });
+  // handleChange function for form
+  const handleChange = (event) => {
+    setEditForm(prevState => ({
+      ...prevState,
+      [event.target.name]: event.target.value
+    }));
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    props.updatePeople(editForm);
+  };
+  const handleDelete = () => {
+    props.deletePeople(person._id);
+  };
+  const loaded = () => {
+    return (
+      <>
+        <h1>{person.name}</h1>
+        <h2>{person.title}</h2>
+        <img
+          className="avatar-image"
+          src={person.image}
+          alt={person.name}
+        />
+        <button id="delete" onClick={handleDelete}>
+          DELETE
+        </button>
+      </>
+    );
+  };
+  const loading = () => {
+    return <h1>Loading ...</h1>;
+  };
+  useEffect(() => {
+    if(person) {
+      setEditForm(person);
     }
-    return(
-        <div className='ShowModal'>
-            <div>Event Details</div>
-            <div>User</div>
-            <div>Comment Section</div>
-        </div>
-    )
-}
-
-export default ShowModal
+  }, [person]);
+  return (
+    <div className="person">
+      { person ? loaded() : loading() }
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={editForm.name}
+          name="name"
+          placeholder="name"
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          value={editForm.image}
+          name="image"
+          placeholder="image URL"
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          value={editForm.title}
+          name="title"
+          placeholder="title"
+          onChange={handleChange}
+        />
+        <input type="submit" value="Update Person" />
+      </form>
+    </div>
+  );
+})
+export default Show;

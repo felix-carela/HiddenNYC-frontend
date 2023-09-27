@@ -17,11 +17,16 @@ const MapContainer = ({user, profile}) => {
   const [center, setCenter] = useState(defaultCenter);
   const [showEventModal, setEventModalVis] = useState(false)
   const [showModal, setModalVis] = useState(false);
+  const [events, setEvents] = useState([])
 
-  // useEffect(async () => {
-  //   const data = await getAllEvents();
-  //   setMarkers(data)
-  // }, [])
+  useEffect(() => {
+    const fetchEvents = async() =>{
+      const data = await getAllEvents()
+      console.log(data)
+      setEvents(data)
+    }
+    fetchEvents()
+  }, [])
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -34,15 +39,15 @@ const MapContainer = ({user, profile}) => {
         setMarkers(markers => markers.slice(0, markers.length - 1));
       }
     };
-
+  
     if (showModal || showEventModal) {
       document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
     }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
   }, [showModal, showEventModal]);
+  
 
   const mapContainerStyles = {
     height: "95vh",
@@ -50,7 +55,6 @@ const MapContainer = ({user, profile}) => {
   };
 
   const handleMapClick = (event) => {
-    console.log(user)
     if(!user){
       return
     }
@@ -67,7 +71,6 @@ const MapContainer = ({user, profile}) => {
 
   const handleShowEvent = () => {
     setModalVis(prevState => !prevState)
-
   }
 
   return (
@@ -77,15 +80,21 @@ const MapContainer = ({user, profile}) => {
         zoom={14}
         center={center}
         onDblClick={handleMapClick}
-        options={{ mapId : "af6bc521083dc9cf",
-                   disableDoubleClickZoom:true }}
+        options={{ mapId : "af6bc521083dc9cf", disableDoubleClickZoom:true }}
       >
-        {user&&markers.map((marker, index) => (
-          <Marker route='' key={index} position={marker}
+        {user&&events && events.map(event => (
+          <Marker 
+            key={event._id} 
+            position={{lat:event.coordinates.latitude, lng: event.coordinates.longitude}}
+            onClick={() => handleShowEvent} // Pass the event to the handler if needed
+          />
+        ))}
+        {user && markers.map((marker, index) => (
+          <Marker user={profile} key={index} position={marker}
           onClick={handleShowEvent}/>
         ))}
-      <EventFormModal ref={eventModalRef} show={showEventModal} onClose={() => setEventModalVis(false)} />
-        <ShowModal ref={showModalRef} show={showModal} onClose={() => setModalVis(false)} />
+        <EventFormModal ref={eventModalRef} show={showEventModal} coordinates={center} onClose={() => setEventModalVis(false)} />
+        <ShowModal ref={showModalRef} show={showModal} user={profile} onClose={() => setModalVis(false)} />
       </GoogleMap>
     </LoadScript>
   );
