@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function EventFormModal(props) {
+
+const EventFormModal = React.forwardRef((props, ref) => {
   const [newForm, setNewForm] = useState({
     name: '',
     address: '',
@@ -42,7 +43,7 @@ function EventFormModal(props) {
   }
 
   return (
-    <section className="EventModal">
+    <div ref={ref} className="EventModal">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -74,9 +75,9 @@ function EventFormModal(props) {
         />
         <input type="submit" value="Create Event" />
       </form>
-      {props.details ? loaded() : <p>Loading...</p>}
-    </section>
+    </div>
   );
-}
+});
+
 
 export default EventFormModal;

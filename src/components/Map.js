@@ -1,37 +1,74 @@
-import React, { useState } from 'react';
-import {Link} from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import ShowModal from './Modal'
 import EventFormModal from './EventFormModal';
-const MapContainer = ({user, profile}) => {
-  let API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-  const mapContainerStyles = {
-    height: "95vh",
-    width: "100%"
-  };
+import ShowModal from './Modal';
+import { getAllEvents } from '../api/events';
+
+const MapContainer = ({ user, profile }) => {
+  const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+
   const defaultCenter = {
     lat: 40.783660, lng: -73.965019
   };
+
+  const eventModalRef = useRef(null)
+  const showModalRef = useRef(null)
   const [markers, setMarkers] = useState([]);
   const [center, setCenter] = useState(defaultCenter);
-  const [showEventModal, setEventModalVis] = useState(false)
-  const [showModal, setModalVis] = useState(false)
+  const [showEventModal, setShowEventModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [events, setEvents] = useState([]);
+  const [markerDetails, setMarkerDetails] = useState(null);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const data = await getAllEvents();
+      setEvents(data);
+    };
+    fetchEvents();
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        eventModalRef.current && !eventModalRef.current.contains(event.target) ||
+        showModalRef.current && !showModalRef.current.contains(event.target)
+      ) {
+        setShowModal(false);
+        setShowEventModal(false);
+        setMarkers(markers => markers.slice(0, markers.length - 1));
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showModal, showEventModal]);
+
   const handleMapClick = (event) => {
-    console.log(user)
-    if(!user){
-      return
-    }
+    if (!user) return;
+
     const newMarker = {
       lat: event.latLng.lat(),
       lng: event.latLng.lng()
     };
+
     setCenter(newMarker);
-    setMarkers(currentMarkers => [...currentMarkers, newMarker]);
-    setEventModalVis(prevState => !prevState)
+    setMarkers(prev => [...prev, newMarker]);
+    setShowEventModal(true);
   };
-  const handleShowEvent = () => {
-    setModalVis(prevState => !prevState)
-  }
+
+  const handleMarkerClick = (event) => {
+    setMarkerDetails(event);
+    setShowModal(true);
+  };
+
+  const mapContainerStyles = {
+    height: "95vh",
+    width: "100%"
+  };
+
   return (
     <LoadScript googleMapsApiKey={API_KEY}>
       <GoogleMap
@@ -39,18 +76,23 @@ const MapContainer = ({user, profile}) => {
         zoom={14}
         center={center}
         onDblClick={handleMapClick}
-        options={{ mapId : "af6bc521083dc9cf",
-    disableDoubleClickZoom:true }}
+        options={{ mapId: "af6bc521083dc9cf", disableDoubleClickZoom: true }}
       >
-        {user&&markers.map((marker, index) => (
-          <Marker key={index} position={marker}
-          onClick={handleShowEvent}/>
+        {user && events.map(event => (
+          <Marker
+            key={event._id}
+            position={{ lat: event.coordinates.latitude, lng: event.coordinates.longitude }}
+            onClick={() => handleMarkerClick(event)}
+          />
         ))}
-      <EventFormModal show={showEventModal} onClose={() => setEventModalVis(false)} />
-      <ShowModal show={showModal} onClose={() => setModalVis(false)}/>
+        {user && markers.map((marker, index) => (
+          <Marker key={index} position={marker} onClick={() => handleMarkerClick(marker)} />
+        ))}
+        <EventFormModal ref={eventModalRef} show={showEventModal} coordinates={center} onClose={() => setShowEventModal(false)} />
+        <ShowModal ref={showModalRef} show={showModal} user={profile} details={markerDetails} onClose={() => setShowModal(false)} />
       </GoogleMap>
     </LoadScript>
   );
 }
-export default MapContainer;
 
+export default MapContainer;

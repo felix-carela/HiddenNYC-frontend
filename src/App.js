@@ -1,32 +1,33 @@
-import React from 'react';
+import React, { useState }  from 'react';
+import {Link} from 'react-router-dom'
 import useGoogleAuth from './components/useGoogleAuth';
 import Map from './components/Map'
-import { useState } from 'react'
 import './App.css';
 
 function App() {
   const { user, profile, login, logOut } = useGoogleAuth();
-  const [showProfile, setShowProfile] = useState(false); // Initially, don't show user profile
+  const [showProfile, setShowProfile] = useState(false);
 
   return (
     <div className="container">
-    <button
-      className={`hamburger-button ${showProfile ? 'active' : ''}`}
-      onClick={() => setShowProfile(!showProfile)}
-    >
-      <div className="bar"></div>
-      <div className="bar"></div>
-      <div className="bar"></div>
-    </button>
-    {showProfile && profile ? (
-      <div className="profile-section">
-        <h3>User Logged in</h3>
-        <p>Name: {profile.name}</p>
-        <p>Email: {profile.email}</p>
-        <button onClick={logOut}>Log out</button>
-      </div>
-    ) : null}
-      {/* Show the map section regardless of whether the user is logged in */}
+      {user&&
+            <button
+              className={`hamburger-button ${showProfile ? 'active' : ''}`}
+              onClick={() => setShowProfile(!showProfile)}
+            >
+              <div className="bar"></div>
+              <div className="bar"></div>
+              <div className="bar"></div>
+            </button>
+          }
+      {showProfile && profile ? (
+            <div className="profile-section">
+              <h3>User Logged in</h3>
+              <p>Name: {profile.name}</p>
+              <p>Email: {profile.email}</p>
+              <button onClick={logOut}>Log out</button>
+            </div>
+          ) : null}
       <div className="map-section">
         <Map user={user} profile={profile}/>
       </div>
