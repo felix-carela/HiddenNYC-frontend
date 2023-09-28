@@ -20,14 +20,14 @@ const EventFormModal = React.forwardRef((props, ref) => {
     event.preventDefault();
     // TODO refactor and fix the arguments being passed
     setNewForm({
-      name: props.user.given_name,
+      name: '',
       address: '',
       image: '',
       description: '',
       coordinates: props.coordinates,
-      userId: props.user.id
+      // userId: props.user.id
     });
-    createEvent(profile.user._id, profile.user.userName, props.coordinates, newForm.description, newForm.image, newForm.address)
+    createEvent(profile.user._id, profile.user.userName, props.coordinates, newForm.description, newForm.imageUrl, newForm.address)
     // TODO this is a hack remove setTImeout and use
     // promise chainging to recieve data after newEvent post is made to db
     setTimeout(() => {
@@ -42,6 +42,13 @@ const EventFormModal = React.forwardRef((props, ref) => {
   return (
     <div ref={ref} className="EventModal">
       <form onSubmit={handleSubmit}>
+      <input
+          type="text"
+          value={newForm.name}
+          name="name"
+          placeholder="name"
+          onChange={handleChange}
+        />
         <input
           type="text"
           value={newForm.address}
@@ -51,7 +58,7 @@ const EventFormModal = React.forwardRef((props, ref) => {
         />
         <input
           type="text"
-          value={newForm.image}
+          value={newForm.imageUrl}
           name="image"
           placeholder="image URL"
           onChange={handleChange}

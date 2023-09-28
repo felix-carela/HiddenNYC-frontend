@@ -12,7 +12,6 @@ export default function useGoogleAuth() {
     console.log("PROFILE: ", profile);
     console.log("USER: ", user);
   }, [profile, user]);
-
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
       setUser(codeResponse);
@@ -39,6 +38,8 @@ export default function useGoogleAuth() {
         .catch((err) => console.log(err));
     }
   }, [user]);
+
+  
 
   const logOut = async () => {
     console.log('LOGGED OUT');

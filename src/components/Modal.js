@@ -36,7 +36,7 @@ const Show = React.forwardRef((props, ref) => {
         <h2>{details.address}</h2>
         <img
           className="avatar-image"
-          src={details.image}
+          src={details.imageUrl}
           alt={details.name}
         />
         <h2>{details.description}</h2>
@@ -82,7 +82,7 @@ const Show = React.forwardRef((props, ref) => {
         />
         <input
           type="text"
-          value={editForm.image}
+          value={editForm.imageUrl}
           name="image"
           placeholder="image URL"
           onChange={handleChange}
