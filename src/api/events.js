@@ -11,9 +11,9 @@ export const getAllEvents = async () => {
     }
   };
 
-// export const createEvent = async (userId, userName, coordinates, description, imageURL) => {
-//     const response = await api.post('/event/',{
-//         userId, userName, coordinates, description, imageURL 
-//     })
-//     return response.data
-// }
+export const createEvent = async (userId, name, coordinates, description, imageURL, address) => {
+    const response = await api.post('/event', {
+        userId, name, coordinates, description, imageURL, address 
+    })
+    return response.data
+}

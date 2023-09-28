@@ -1,16 +1,17 @@
-import React, { useState }  from 'react';
-import {Link} from 'react-router-dom'
-import useGoogleAuth from './components/useGoogleAuth';
+import React, { useState, useContext }  from 'react';
+import { GoogleAuthContext } from './components/useGoogleAuth';
+
 import Map from './components/Map'
 import './App.css';
 
 function App() {
-  const { user, profile, login, logOut } = useGoogleAuth();
+  const { user, profile, login, logOut } = useContext(GoogleAuthContext);
+
   const [showProfile, setShowProfile] = useState(false);
 
   return (
     <div className="container">
-      {user&&
+      {user &&
             <button
               className={`hamburger-button ${showProfile ? 'active' : ''}`}
               onClick={() => setShowProfile(!showProfile)}
@@ -23,8 +24,8 @@ function App() {
       {showProfile && profile ? (
             <div className="profile-section">
               <h3>User Logged in</h3>
-              <p>Name: {profile.name}</p>
-              <p>Email: {profile.email}</p>
+              <p>Name: {profile?.name}</p>
+              <p>Email: {profile?.email}</p>
               <button onClick={logOut}>Log out</button>
             </div>
           ) : null}
