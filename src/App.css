@@ -189,22 +189,103 @@ body{
   border-radius: 25px;
   box-shadow: 12px 12px 20px 1px black;
 }
-
-.EventModal{
+.ShowModal form {
   display: flex;
-  height: 80vh;
-  width: 25%;
-  min-width:300px;
-  min-height:500px;
+  flex-direction: column;
+}
+
+/* Style for input fields */
+.ShowModal input[type="text"] {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+/* Style for the submit button */
+.ShowModal input[type="submit"] 
+{
+  background-color: #007bff; /* Change this to your preferred button color */
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+/* Style for the container div */
+/* Style for the container div */
+/* Style for the container div */
+.EventModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh; 
+  width: 20%;
+  min-width: 300px;
+  min-height: 500px;
   position: relative;
   z-index: 1;
   background-color: white;
-  margin-left: 5%;
-  margin-top:5%;
   border-radius: 25px;
   box-shadow: 12px 12px 20px 1px black;
+  margin-left: 15%;
+  margin-top: 5%; 
+  background-image: url("https://images.pexels.com/photos/1480690/pexels-photo-1480690.jpeg?cs=srgb&dl=pexels-sebastiaan-stam-1480690.jpg&fm=jpg");
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  background-position: center;
 }
+
+
+
+/* Style for the form container within EventModal */
+.EventModal form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%; 
+  max-width: 400px; 
+}
+
+/* Style for input fields */
+.EventModal input[type="text"] {
+  margin-bottom: 15px; 
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 16px; 
+  width: 100%; 
+}
+
+/* Style for the submit button */
+.EventModal input[type="submit"] {
+  background-color: #007bff; /* Change this to your preferred button color */
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  font-size: 18px; /* Slightly increased font size for the button */
+  cursor: pointer;
+}
+
+/* Style for the submit button on hover */
+.EventModal input[type="submit"]:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Style for the description input field with larger text */
+.EventModal input[name="description"] {
+  font-size: 18px; /* Larger font size for the description input */
+}
+
 
 .gm-fullscreen-control, .gm-style-mtc, .gm-svpc, .gmnoprint{
   display:none;
+}
+
+.avatar-image{
+  max-height: 5vh;
+  max-width: 2vh;
 }

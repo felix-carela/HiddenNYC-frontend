@@ -6,8 +6,6 @@ import './App.css';
 
 function App() {
   const { user, profile, login, logOut } = useContext(GoogleAuthContext);
-  console.log('init user', user)
-
   const [showProfile, setShowProfile] = useState(false);
 
   return (
@@ -26,7 +24,6 @@ function App() {
             <div className="profile-section">
               <h3>User Logged in</h3>
               <p>Name: {profile?.user.userName}</p>
-              {/* <p>Email: {profile?.user.email}</p> */}
               <button onClick={logOut}>Log out</button>
             </div>
           ) : null}
