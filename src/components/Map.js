@@ -36,7 +36,7 @@ const MapContainer = ({ user, profile }) => {
       setEvents(data);
     };
     fetchEvents();
-    // updateNewEvents(false)
+    updateNewEvents(false)
   }, [newEvent]);
 
   useEffect(() => {
@@ -99,8 +99,8 @@ const MapContainer = ({ user, profile }) => {
         {user && markers.map((marker, index) => (
           <Marker key={index} position={marker} onClick={() => handleMarkerClick(marker)} />
         ))}
-        <EventFormModal ref={eventModalRef} user={profile} show={showEventModal} updateNewEvents={updateNewEvents} coordinates={center} onClose={() => setShowEventModal(false)} />
-        <ShowModal ref={showModalRef} show={showModal} user={profile} details={markerDetails} onClose={() => setShowModal(false)} />
+        <EventFormModal ref={eventModalRef} user={profile} show={showEventModal} setShow={setShowEventModal} updateNewEvents={updateNewEvents} coordinates={center} onClose={() => setShowEventModal(false)} />
+        <ShowModal ref={showModalRef} set={setShowModal} show={showModal} user={profile} details={markerDetails} updateNewEvents={updateNewEvents} onClose={() => setShowModal(false)} />
       </GoogleMap>
     </LoadScript>
   );
