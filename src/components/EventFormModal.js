@@ -33,6 +33,7 @@ const EventFormModal = React.forwardRef((props, ref) => {
     setTimeout(() => {
         props.updateNewEvents(true)
     }, 1000)
+    props.setShow(false)
   };
 
   if (!props.show) {

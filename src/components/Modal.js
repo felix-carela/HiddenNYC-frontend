@@ -1,8 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import { deleteEvent } from '../api/events';
 
 const Show = React.forwardRef((props, ref) => {
-    const { id } = useParams();
+    // const { id } = useParams();
   const details = props.details;
 //   const detail = details ? details.find((p) => p._id === id) : null;
   const [editForm, setEditForm] = useState({
@@ -26,7 +27,11 @@ const Show = React.forwardRef((props, ref) => {
   };
 
   const handleDelete = () => {
-    props.deleteDetail(details._id);
+    deleteEvent(props.details._id, props.user.user._id)    
+    setTimeout(() => {
+        props.updateNewEvents(true)
+    }, 1000)
+    props.set(false)
   };
 
   const loaded = () => {
