@@ -62,4 +62,6 @@ This application's name is HiddenNYC, it allows user's to explore lesser-known p
 | Thursday   |   | Quality assurance                  |          |                 |
 | Friday     |   | Presentation Day                   |          |                 |
 
+
 ### Resources
+
