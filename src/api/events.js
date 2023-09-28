@@ -11,10 +11,8 @@ export const getAllEvents = async () => {
     }
   };
 
-export const createEvent = async (userId, name, coordinates, description, imageUrl, address) => {
-    const response = await api.post('/event', {
-        userId, name, coordinates, description, imageUrl, address 
-    })
+export const createEvent = async (form) => {
+    const response = await api.post('/event', form)
     return response.data
 }
 
