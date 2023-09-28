@@ -17,3 +17,4 @@ export const createEvent = async (userId, name, coordinates, description, imageU
     })
     return response.data
 }
+

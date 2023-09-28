@@ -20,7 +20,7 @@ const EventFormModal = React.forwardRef((props, ref) => {
     event.preventDefault();
     // TODO refactor and fix the arguments being passed
     setNewForm({
-      name: props.user.given_name,
+      name: '',
       address: '',
       image: '',
       description: '',
