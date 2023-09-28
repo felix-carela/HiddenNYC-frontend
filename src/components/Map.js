@@ -19,6 +19,7 @@ const MapContainer = ({ user, profile }) => {
   const [showModal, setShowModal] = useState(false);
   const [events, setEvents] = useState([]);
   const [markerDetails, setMarkerDetails] = useState(null);
+  const [newEvent, updateNewEvents] = useState(false)
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -27,6 +28,16 @@ const MapContainer = ({ user, profile }) => {
     };
     fetchEvents();
   }, []);
+
+  useEffect(() => {
+    console.log('firing')
+    const fetchEvents = async () => {
+      const data = await getAllEvents();
+      setEvents(data);
+    };
+    fetchEvents();
+    // updateNewEvents(false)
+  }, [newEvent]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -81,14 +92,14 @@ const MapContainer = ({ user, profile }) => {
         {user && events.map(event => (
           <Marker
             key={event._id}
-            position={{ lat: event.coordinates.latitude, lng: event.coordinates.longitude }}
+            position={{ lat: event.coordinates.lat,  lng: event.coordinates.lng} }
             onClick={() => handleMarkerClick(event)}
           />
         ))}
         {user && markers.map((marker, index) => (
           <Marker key={index} position={marker} onClick={() => handleMarkerClick(marker)} />
         ))}
-        <EventFormModal ref={eventModalRef} show={showEventModal} coordinates={center} onClose={() => setShowEventModal(false)} />
+        <EventFormModal ref={eventModalRef} user={profile} show={showEventModal} updateNewEvents={updateNewEvents} coordinates={center} onClose={() => setShowEventModal(false)} />
         <ShowModal ref={showModalRef} show={showModal} user={profile} details={markerDetails} onClose={() => setShowModal(false)} />
       </GoogleMap>
     </LoadScript>

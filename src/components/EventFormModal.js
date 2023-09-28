@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import React, { useState, useContext } from 'react';
+import {createEvent} from '../api/events'
+import { GoogleAuthContext } from './useGoogleAuth';
 
 const EventFormModal = React.forwardRef((props, ref) => {
-  const [newForm, setNewForm] = useState({
-    name: '',
-    address: '',
-    image: '',
-    description: '',
-  });
+  const [newForm, setNewForm] = useState({});
+  const { user, profile, login, logOut } = useContext(GoogleAuthContext);
 
   const handleChange = (event) => {
     setNewForm((prevState) => ({
@@ -18,24 +14,25 @@ const EventFormModal = React.forwardRef((props, ref) => {
   };
 
   const handleSubmit = (event) => {
+
+    console.log(profile);
+
     event.preventDefault();
-    props.createDetails(newForm);
+    // TODO refactor and fix the arguments being passed
     setNewForm({
-      name: '',
+      name: props.user.given_name,
       address: '',
       image: '',
       description: '',
+      coordinates: props.coordinates,
+      userId: props.user.id
     });
-  };
-
-  const loaded = () => {
-    return props.details.map((detail) => (
-      <div key={detail._id} className="detail">
-        <Link to={`/details/${detail._id}`}>
-          <h1>{detail.name}</h1>
-        </Link>
-      </div>
-    ));
+    createEvent(profile.user._id, profile.user.userName, props.coordinates, newForm.description, newForm.image, newForm.address)
+    // TODO this is a hack remove setTImeout and use
+    // promise chainging to recieve data after newEvent post is made to db
+    setTimeout(() => {
+        props.updateNewEvents(true)
+    }, 1000)
   };
 
   if (!props.show) {
@@ -45,13 +42,6 @@ const EventFormModal = React.forwardRef((props, ref) => {
   return (
     <div ref={ref} className="EventModal">
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={newForm.name}
-          name="name"
-          placeholder="name"
-          onChange={handleChange}
-        />
         <input
           type="text"
           value={newForm.address}
