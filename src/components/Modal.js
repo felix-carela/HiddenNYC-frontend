@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { deleteEvent } from '../api/events';
+import { deleteEvent, updateEvent } from '../api/events';
 
 const Show = React.forwardRef((props, ref) => {
     // const { id } = useParams();
@@ -23,7 +23,11 @@ const Show = React.forwardRef((props, ref) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.updateDetails(editForm);
+    updateEvent(props.details._id, editForm)
+    setTimeout(() => {
+        props.updateNewEvents(true)
+    }, 1000)
+    props.set(false)
   };
 
   const handleDelete = () => {
@@ -45,9 +49,6 @@ const Show = React.forwardRef((props, ref) => {
           alt={details.name}
         />
         <h2>{details.description}</h2>
-        <button id="delete" onClick={handleDelete}>
-          DELETE
-        </button>
       </>
     );
   };
@@ -69,38 +70,45 @@ const Show = React.forwardRef((props, ref) => {
 
   return (
     <div className="ShowModal" ref={ref}>
-      {details ? loaded() : loading()}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={editForm.name}
-          name="name"
-          placeholder="name"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          value={editForm.address}
-          name="address" // Fix the 'name' attribute to 'address'
-          placeholder="address"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          value={editForm.imageUrl}
-          name="image"
-          placeholder="image URL"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          value={editForm.description}
-          name="description"
-          placeholder="description"
-          onChange={handleChange}
-        />
-        <input type="submit" value="Update Event" />
-      </form>
+    {details ? loaded() : loading()}
+      {props.user.user._id === props.details.userId && (
+        <>
+        <button id="delete" onClick={handleDelete}>
+          DELETE
+        </button>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              value={editForm.name}
+              name="name"
+              placeholder="name"
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              value={editForm.address}
+              name="address"
+              placeholder="address"
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              value={editForm.imageUrl}
+              name="image"
+              placeholder="image URL"
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              value={editForm.description}
+              name="description"
+              placeholder="description"
+              onChange={handleChange}
+            />
+            <input type="submit" value="Update Event" />
+          </form>
+        </>
+      )}
     </div>
   );
 })

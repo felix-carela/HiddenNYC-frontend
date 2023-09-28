@@ -19,16 +19,13 @@ export const createEvent = async (userId, name, coordinates, description, imageU
 }
 
 export const deleteEvent = async (eventId, userId) =>{
-  console.log('make a delete request to the backend' )
-  
-  // console.log("eventId: ", eventId)
-  // console.log("userId: ", userId)
-  // const tempObj = {
-  //   "eventId":eventId, 
-  //   "userId":userId
-  // }
-  // console.log("tempObj: ", tempObj)
+
   const response = await api.delete(`/event/${eventId}`)
   return response.data
 }
 
+export const updateEvent = async (eventId, name, address, imageUrl, details ) => {
+  console.log(eventId)
+  const response = await api.put(`/event/${eventId}`, name, address, imageUrl, details)
+  return response.data
+}
