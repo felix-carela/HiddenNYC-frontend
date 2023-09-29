@@ -1,4 +1,3 @@
-
 # HiddenNYC
 
 This application's name is HiddenNYC, it allows user's to explore lesser-known pop-up food places and speakeasy bars in Manhattan. Users are able to create their favorite locations and place them around the map.
@@ -26,12 +25,6 @@ This application's name is HiddenNYC, it allows user's to explore lesser-known p
 - `Postman`
 - `Heroku & Vercel`
 
-## Entity Relationship Diagram
-
-![image](https://raw.git.generalassemb.ly/felix-carela-GA/Project-3-Proposal/main/HiddeNYC.jpeg?token=AAAMIBK6LIBB76JQA5IEYRDFD3GN6)
-
-![image](https://raw.git.generalassemb.ly/felix-carela-GA/Project-3-Proposal/main/HiddenNYC%20Data.png?token=AAAMIBLPU2ILML7WBLWNRQTFD3GPW)
-
 ## User Stories
 
 ### MVP Goals
@@ -41,18 +34,19 @@ This application's name is HiddenNYC, it allows user's to explore lesser-known p
 - As a user, I want to be able to be able to login using Google.
 - As a user, I want to be able to be able to delete a location I created.
 
-#### Stretch Goals
+### Stretch Goals
 
 - As a user, I want to be able to report false information.
 - As a user, if a post reachest a certain negative threshold, I want it to be removed.
 - As a user, if I pass by one of these places I want to be sent a notification.
 - As a user, I want to be able to see Eventbrite events.
 
-### Team Expectations
-- Felix & Naischa - Backend Developers
-- Lu & Axel - Front End Developers
+## Team Expectations
 
-#### Timeline - Daily Accountability
+- Felix & Naischa - Backend Developers
+- Guoxing & Axel - Front End Developers
+
+### Timeline - Daily Accountability
 
 | Day        |   | Task                               | Blockers | Notes/ Thoughts |
 |------------|---|------------------------------------|----------|-----------------|
@@ -63,5 +57,5 @@ This application's name is HiddenNYC, it allows user's to explore lesser-known p
 | Friday     |   | Presentation Day                   |          |                 |
 
 
-### Resources
+## Resources
 
