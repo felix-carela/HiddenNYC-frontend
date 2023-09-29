@@ -31,6 +31,7 @@ const Show = React.forwardRef((props, ref) => {
   const handleDelete = () => {
     deleteEvent(props.details._id, props.user.user._id)    
     setTimeout(() => {
+      console.log('FIRING')
         props.updateNewEvents(true)
     }, 1000)
     props.set(false)
@@ -92,15 +93,9 @@ const Show = React.forwardRef((props, ref) => {
               placeholder="address"
               onChange={handleChange}
             />
-            <h3>ImageUrl:</h3>
-            <input
-              type="text"
-              value={editForm.imageUrl}
-              name="image"
-              placeholder="image URL"
-              onChange={handleChange}
             />
             <h3>description:</h3>
+
             <input
               type="text"
               value={editForm.description}

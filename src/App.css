@@ -15,6 +15,21 @@ body{
 }
 
 
+.ShowModal{
+  display: flex;
+  min-height:25vh;
+  min-width:25vh;
+  position: relative;
+  z-index: 1;
+  background-color: white;
+  margin-left: 5%;
+  margin-top:5%;
+  border-radius: 25px;
+  box-shadow: 12px 12px 20px 1px black;
+  transition: all 0.5 ease-in-out;
+  overflow-y:auto
+}
+
 
 .button-container {
   position: absolute;
@@ -25,13 +40,13 @@ body{
   text-align: center;
   margin-top: 20px;
   background-color: #fff;
-  border: 1px solid #d9d9d9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
   border-radius: 4px;
   width: 300px;
   height: 400px; /* Increase the height as needed */
 }
+
 
 
 .login-button {
@@ -63,6 +78,10 @@ body{
 }
 /* Style for the hamburger button */
 .hamburger-button {
+  position: fixed;
+  top: 5vh;
+  left: 5vh;
+  z-index:3;
   background: none;
   border: none;
   cursor: pointer;
@@ -80,13 +99,14 @@ body{
 /* Style for each bar in the hamburger button */
 .bar {
   width: 100%;
+  border:1px white solid;
   height: 3px;
-  background-color: #333;
+  background-color: rgba(5, 5, 248, 0.95);
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 /* Style for the active state of the hamburger button */
-.hamburger-button.active .bar:first-child {
+/* .hamburger-button.active .bar:first-child {
   transform: translateY(5px) rotate(45deg);
 }
 
@@ -96,20 +116,22 @@ body{
 
 .hamburger-button.active .bar:last-child {
   transform: translateY(-5px) rotate(-45deg);
-}
+} */
 
 /* Style for the profile section */
 .profile-section {
   display: none;
   position: fixed;
-  top: 50px; /* Adjust the top position as needed */
-  left: 20px; /* Adjust the right position as needed */
-  background-color: #ffffff;
+  top:5vh;
+  left: 15vh;
+  color:white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   padding: 10px;
   z-index: 2; /* Ensure it's above other content */
   text-align: left;
+  background-color: rgb(97, 96, 96);
+  border:1px solid white;
 }
 
 /* Show the profile section when the hamburger button is active */
@@ -121,19 +143,19 @@ body{
 .profile-section h3 {
   font-size: 1.2rem;
   margin-bottom: 10px;
-  color: #333;
+  color: white;
 }
 
 /* Style for the user information */
 .profile-section p {
   font-size: 1rem;
   margin: 5px 0;
-  color: #555;
+  color: white;
 }
 
 /* Style for the log out button */
 .profile-section button {
-  background-color: #ff5733;
+  background-color: #0800ff;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -148,13 +170,14 @@ body{
   background-color: #ff331a;
 }
 
-.LogIn-Modal{
+/* .LogIn-Modal{
   display:flex;
   justify-content:center;
   align-items: center;
   max-width:400px;
   max-height:400px;
-}
+  border:none;
+} */
 
 .Hidden{
   display:none;
@@ -265,7 +288,7 @@ body{
 }
 
 
-.gm-fullscreen-control, .gm-style-mtc, .gm-svpc, .gmnoprint{
+.gm-fullscreen-control, .gm-style-mtc, .gm-svpc, .gmnoprint {
   display:none;
 }
 

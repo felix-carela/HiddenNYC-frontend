@@ -77,7 +77,7 @@ const MapContainer = ({ user, profile }) => {
   };
 
   const mapContainerStyles = {
-    height: "95vh",
+    height: "100vh",
     width: "100%"
   };
 
@@ -88,7 +88,7 @@ const MapContainer = ({ user, profile }) => {
         zoom={14}
         center={center}
         onDblClick={handleMapClick}
-        options={{ mapId: "af6bc521083dc9cf", disableDoubleClickZoom: true }}
+        options={{ mapId: "b4a5ed7fa5846f35", disableDoubleClickZoom: true }}
       >
         {user && events.map(event => (
           <Marker
