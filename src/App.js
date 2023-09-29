@@ -9,7 +9,7 @@ function App() {
   const [showProfile, setShowProfile] = useState(false);
 
   return (
-    <div className="container">
+    <div className="container" >
       {user &&
             <button
               className={`hamburger-button ${showProfile ? 'active' : ''}`}

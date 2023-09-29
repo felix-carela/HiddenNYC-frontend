@@ -32,11 +32,18 @@ const EventFormModal = React.forwardRef((props, ref) => {
       coordinates: props.coordinates,
       userId: props.user.user._id
     };
-    setNewForm(updatedForm)
     createEvent(updatedForm)
     setTimeout(() => {
         props.updateNewEvents(true)
     }, 1000)
+    setNewForm({
+      name: "",
+      address: "",
+      imageUrl: "",
+      description: "",
+      coordinates: null,
+      userId: null
+    })
     props.setShow(false)
   };
 
@@ -53,6 +60,7 @@ const EventFormModal = React.forwardRef((props, ref) => {
           name="name"
           placeholder="name"
           onChange={handleChange}
+          required={true}
         />
         <input
           type="text"
@@ -60,6 +68,7 @@ const EventFormModal = React.forwardRef((props, ref) => {
           name="address"
           placeholder="address"
           onChange={handleChange}
+          required={true}
         />
         <input
           type="text"
@@ -67,6 +76,7 @@ const EventFormModal = React.forwardRef((props, ref) => {
           name="imageUrl"
           placeholder="image URL"
           onChange={handleChange}
+          required={true}
         />
         <input
           type="text"
@@ -74,6 +84,7 @@ const EventFormModal = React.forwardRef((props, ref) => {
           name="description"
           placeholder="description"
           onChange={handleChange}
+          required={true}
         />
         <input type="submit" value="Create Event" />
       </form>
