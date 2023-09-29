@@ -11,6 +11,7 @@ const MapContainer = ({ user, profile }) => {
     lat: 40.783660, lng: -73.965019
   };
 
+  
   const eventModalRef = useRef(null)
   const showModalRef = useRef(null)
   const [markers, setMarkers] = useState([]);
