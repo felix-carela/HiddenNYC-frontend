@@ -128,7 +128,7 @@ body{
   padding: 10px;
   z-index: 2; /* Ensure it's above other content */
   text-align: left;
-  background-color: none;
+  background-color: rgb(97, 96, 96);
   border:1px solid white;
 }
 
