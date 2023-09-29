@@ -3,10 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { deleteEvent, updateEvent } from '../api/events';
 
 const Show = React.forwardRef((props, ref) => {
-    // const { id } = useParams();
-    console.log(props.user)
   const details = props.details;
-//   const detail = details ? details.find((p) => p._id === id) : null;
   const [editForm, setEditForm] = useState({
     name: "",
     address: "",
@@ -23,7 +20,6 @@ const Show = React.forwardRef((props, ref) => {
   };
 
   const handleSubmit = (event) => {
-    console.log(props.details.imageUrl)
     event.preventDefault();
     updateEvent(props.details._id, editForm)
     setTimeout(() => {
