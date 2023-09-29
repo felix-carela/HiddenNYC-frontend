@@ -38,7 +38,7 @@ const MapContainer = ({ user, profile }) => {
     };
     fetchEvents();
     updateNewEvents(false)
-  }, [newEvent]);
+  }, [newEvent, eventModalRef, showModalRef]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {

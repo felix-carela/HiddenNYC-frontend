@@ -3,7 +3,14 @@ import {createEvent} from '../api/events'
 import { GoogleAuthContext } from './useGoogleAuth';
 
 const EventFormModal = React.forwardRef((props, ref) => {
-  const [newForm, setNewForm] = useState({});
+  const [newForm, setNewForm] = useState({
+    name: "",
+    address: "",
+    imageUrl: "",
+    description: "",
+    coordinates: null,
+    userId: null
+  });
   const { user, profile, login, logOut } = useContext(GoogleAuthContext);
 
   const handleChange = (event) => {
@@ -14,22 +21,19 @@ const EventFormModal = React.forwardRef((props, ref) => {
   };
 
   const handleSubmit = (event) => {
-
-    console.log(profile);
-
+    console.log(props.coordinates, props.user.user._id)
     event.preventDefault();
     // TODO refactor and fix the arguments being passed
-    setNewForm({
-      name: '',
-      address: '',
-      image: '',
-      description: '',
+    const updatedForm = {
+      name: newForm.name,
+      address: newForm.address,
+      imageUrl: newForm.imageUrl,
+      description: newForm.description,
       coordinates: props.coordinates,
-      // userId: props.user.id
-    });
-    createEvent(profile.user._id, profile.user.userName, props.coordinates, newForm.description, newForm.imageUrl, newForm.address)
-    // TODO this is a hack remove setTImeout and use
-    // promise chainging to recieve data after newEvent post is made to db
+      userId: props.user.user._id
+    };
+    setNewForm(updatedForm)
+    createEvent(updatedForm)
     setTimeout(() => {
         props.updateNewEvents(true)
     }, 1000)
@@ -60,7 +64,7 @@ const EventFormModal = React.forwardRef((props, ref) => {
         <input
           type="text"
           value={newForm.imageUrl}
-          name="image"
+          name="imageUrl"
           placeholder="image URL"
           onChange={handleChange}
         />
