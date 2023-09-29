@@ -3,14 +3,13 @@ import axios from 'axios';
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 
 const GoogleAuthContext = createContext();
+const API_URL = process.env.REACT_APP_DATABASE_URL
 
 export default function useGoogleAuth() {
   const [user, setUser] = useState();
   const [profile, setProfile] = useState();
 
   useEffect(() => {
-    console.log("PROFILE: ", profile);
-    console.log("USER: ", user);
   }, [profile, user]);
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
@@ -26,7 +25,7 @@ export default function useGoogleAuth() {
       axios
         .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`)
         .then((res) => {
-          axios.post('http://localhost:4000/api/user', res.data)
+          axios.post(API_URL+'/user', res.data)
             .then(response => {
               console.log('Profile sent to backend:', response.data);
               setProfile(response.data);
@@ -42,7 +41,6 @@ export default function useGoogleAuth() {
   
 
   const logOut = async () => {
-    console.log('LOGGED OUT');
     await googleLogout();
     setUser(null);
     setProfile(null);
