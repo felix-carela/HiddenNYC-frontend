@@ -34,7 +34,9 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-image: url('https://images.unsplash.com/photo-1538970272646-f61fabb3a8a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fG5ldyUyMHlvcmslMjBjaXR5fGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60');
+  background-image: url('../public/images/HiddeNYC.gif');
+  background-position-x: center;
+  background-size: cover;
   text-align: center;
   margin-top: 20px;
   background-color: #fff;
@@ -52,14 +54,13 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: silver; /* Background color for the button */
   color: #fff; /* Text color for the button */
-  border: none;
+  border: 2px solid white;
+  background:none;
   border-radius: 8px; 
   padding: 15px 30px; 
   font-size: 16px;
   cursor: pointer;
-
   background-size: cover; 
   text-align: center;
   text-decoration: none;
