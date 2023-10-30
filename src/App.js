@@ -34,7 +34,8 @@ function App() {
       </div>
 {!profile ? (
   <div className="button-container">
-    <button className="login-button" onClick={() => login()}>Sign in with Google 🚀</button>
+    <h1>HiddeNYC</h1>
+    <button className="login-button" onClick={() => login()}>Sign in with Google</button>
   </div>
 ) : null}
     </div>
