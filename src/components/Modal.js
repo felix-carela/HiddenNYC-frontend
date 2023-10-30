@@ -69,6 +69,7 @@ const Show = React.forwardRef((props, ref) => {
 
   return (
     <div className="ShowModal" ref={ref}>
+
     {details ? loaded() : loading()}
       {props.user.user._id === props.details.userId && (
         <>
@@ -76,6 +77,7 @@ const Show = React.forwardRef((props, ref) => {
           DELETE
         </button>
           <form onSubmit={handleSubmit}>
+            <h3>EventName:</h3>
             <input
               type="text"
               value={editForm.name}
@@ -83,6 +85,7 @@ const Show = React.forwardRef((props, ref) => {
               placeholder="name"
               onChange={handleChange}
             />
+            <h3>Address:</h3>
             <input
               type="text"
               value={editForm.address}
@@ -90,13 +93,9 @@ const Show = React.forwardRef((props, ref) => {
               placeholder="address"
               onChange={handleChange}
             />
-            {/* <input
-              type="text"
-              value={editForm.imageUrl}
-              name="image"
-              placeholder="image URL"
-              onChange={handleChange}
-            /> */}
+            />
+            <h3>description:</h3>
+
             <input
               type="text"
               value={editForm.description}
@@ -108,6 +107,7 @@ const Show = React.forwardRef((props, ref) => {
           </form>
         </>
       )}
+
     </div>
   );
 })
