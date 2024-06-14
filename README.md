@@ -50,21 +50,7 @@ This app is designed for creating and managing events. Users can create events, 
 - As a user, I'd love to have access to Eventbrite events within the app.
 - As a user, I want to ensure that no other user can delete or change my event information.
 
-## Team Expectations
+## Developers
 
 - Felix & Naischa - Backend Developers
 - Guoxing & Axel - Front End Developers
-
-### Timeline - Daily Accountability
-
-| Day        |   | Task                               | Blockers | Notes/ Thoughts |
-|------------|---|------------------------------------|----------|-----------------|
-| Monday     |   | Present proposal/basic scaffolding |          |                 |
-| Tuesday    |   | Add functionality                  |          |                 |
-| Wednesday  |   | Finalize MVP                       |          |                 |
-| Thursday   |   | Quality assurance                  |          |                 |
-| Friday     |   | Presentation Day                   |          |                 |
-
-
-## Resources
-
